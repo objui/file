@@ -1,0 +1,65 @@
+﻿类与对象
+	属性
+	类的变量成员叫做"属性"，或者叫"字段"、"特征"，在本文档统一称为"属性"。属性声明是由关键字 public，protected 或者 private 开头，然后跟一个普通的变量声明来组成。属性中的变量可以初始化，但是初始化的值必须是常数，这里的常数是指 PHP 脚本在编译阶段时就可以得到其值，而不依赖于运行时的信息才能求值。
+
+	在类的成员方法里面，可以用 ->（对象运算符）：$this->property（其中 property 是该属性名）这种方式来访问非静态属性。静态属性则是用 ::（双冒号）：self::$property 来访问。
+
+
+1、Heredoc 结构  
+
+<<<EOT
+bar
+EOT;
+
+
+2、类常量 
+	class myClass{
+		const constant='tony';
+		function showConstant(){
+			echo self::fonstant. '\n';
+		}
+	}
+3、static静态属性 
+	public static $my_static;
+
+4、抽象类
+	abstract class abstractclass(){}
+
+5、对象接口 
+	接口中定义的所有方法都必须是公有，这是接口的特性。 
+	interface  implements 
+<?php
+
+// 声明一个'iTemplate'接口
+interface iTemplate
+{
+    public function setVariable($name, $var);
+    public function getHtml($template);
+}
+
+
+// 实现接口
+// 下面的写法是正确的
+class Template implements iTemplate
+{
+    private $vars = array();
+  
+    public function setVariable($name, $var)
+    {
+        $this->vars[$name] = $var;
+    }
+  
+    public function getHtml($template)
+    {
+        foreach($this->vars as $name => $value) {
+            $template = str_replace('{' . $name . '}', $value, $template);
+        }
+ 
+        return $template;
+    }
+}
+
+
+
+
+PHP 前端 设计 案例 导航
